@@ -1,0 +1,66 @@
+@startuml
+
+
+class PayDemoActivity {
+  -APPID: String
+  -PID: String
+  -TARGET_ID: String
+  -RSA2_PRIVATE: String
+  -RSA_PRIVATE: String
+  -SDK_PAY_FLAG: int
+  -SDK_AUTH_FLAG: int
+  -orderID: String
+  -money: String
+  -description: String
+  -mHandler: Handler
+  -onCreate(savedInstanceState: Bundle): void
+  -onActivityResult(requestCode: int, resultCode: int, data: Intent): void
+  -payV2(v: View): void
+  -authV2(v: View): void
+  -showSdkVersion(v: View): void
+}
+
+
+
+class OrderInfo {
+  -orderId: String
+  -amount: double
+  -description: String
+
+  +getOrderId(): String
+  +getAmount(): double
+  +getDescription(): String
+}
+class AuthResult {
+  -resultStatus: String
+  -result: String
+  -memo: String
+  -resultCode: String
+  -authCode: String
+  -alipayOpenId: String
+  +AuthResult(rawResult: Map<String, String>, removeBrackets: boolean)
+  +toString(): String
+  +getResultStatus(): String
+  +getMemo(): String
+  +getResult(): String
+  +getResultCode(): String
+  +getAuthCode(): String
+  +getAlipayOpenId(): String
+}
+
+class SignUtils {
+  +sign(content: String, privateKey: String, rsa2: boolean): String
+}
+
+class AlipayPaymentProcessor {
+  +processPayment(orderInfo: OrderInfo): boolean
+}
+
+
+
+PayDemoActivity -- AlipayPaymentProcessor
+PayDemoActivity -- OrderInfo
+PayDemoActivity -- AuthResult
+PayDemoActivity -- SignUtils
+
+@enduml

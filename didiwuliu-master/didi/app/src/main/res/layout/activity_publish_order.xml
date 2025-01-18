@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextStartLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="起点"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editTextEndLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="终点"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/editTextCarriage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="重量/kg"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/editTextReward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="额外赏金/元"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:id="@+id/buttonSubmitOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发布订单"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

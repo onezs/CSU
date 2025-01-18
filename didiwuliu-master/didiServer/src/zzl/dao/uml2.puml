@@ -1,0 +1,96 @@
+@startuml
+
+class HomeFragment {
+  - TAG: String
+  - REQUEST_EDIT: int
+  - homeViewModel: HomeViewModel
+  - mRecyclerView: RecyclerView
+  - mLocationAdapter: LocationAdapter
+  - mDriverAdapter: DriverAdapter
+  - mType: int
+  + onCreateView(...)
+  + onCreateOptionsMenu(...)
+  + onOptionsItemSelected(...)
+  + onActivityResult(...)
+  + onActivityCreated(...)
+}
+
+class HomeViewModel {
+  - mPathData: MutableLiveData<List<PathBean>>
+  - mSearchDrivers: MutableLiveData<List<PathInfoBean>>
+  - mAllPathData: MutableLiveData<List<PathBean>>
+  + HomeViewModel()
+  + getPathData(): LiveData<List<PathBean>>
+  + getAllPathData(): LiveData<List<PathBean>>
+  + getDrivers(): LiveData<List<PathInfoBean>>
+  + fetchAllDriversLocation()
+  + updatePath()
+  + updateDriver(SearchBean searchBean)
+}
+
+class DriverAdapter {
+  - mList: List<PathInfoBean>
+  - mActivity: Activity
+  - nickName: String
+  - phone: String
+  - Ddestination: String
+  - signalPrice: String
+  + DriverAdapter(List<PathInfoBean>, Activity)
+  + getList(): List<PathInfoBean>
+  + setList(List<PathInfoBean>)
+  + onCreateViewHolder(...)
+  + onBindViewHolder(...)
+  + getItemCount(): int
+  class MyViewHolder
+}
+
+class DriverDetailActivity {
+  - EXTRA_ID: String
+  - EXTRA_NICK_NAME: String
+  - EXTRA_PHONE: String
+  - EXTRA_LOCATION: String
+  - EXTRA_DESTINATION: String
+  - EXTRA_CARRIAGE: String
+  - EXTRA_JUMP: String
+  - mID: int
+  - path: String
+  - location: String
+  - destination: String
+  - mHandler: Handler
+  - mPathTv: TextView
+  - weightEt: EditText
+  - priceTv: TextView
+  - payBtn: Button
+  - mProgressBar: ProgressBar
+  - price: float
+  - carriage: float
+  - mPathBeans: PathBean[]
+  + onCreate(Bundle)
+  + setLoading(boolean)
+  + order()
+  + paySuccess()
+  + showToast(String)
+  + setActionBar()
+  + onOptionsItemSelected(MenuItem): boolean
+}
+
+class Utils {
+  + getJsonFromStream(inputStream: InputStream): String
+  + send(response: HttpServletResponse, json: String): void
+  + formatBalance(balance: float): String
+  + isPasswordValid(password: String): boolean
+}
+
+class HttpUtils {
+  + getOkHttpClient(): OkHttpClient
+  + updateUserInfoFromInternet(): boolean
+}
+
+HomeFragment --> HomeViewModel
+HomeFragment --> DriverAdapter
+HomeFragment --> DriverDetailActivity
+HomeViewModel --> HttpUtils
+DriverAdapter --> Utils
+DriverDetailActivity --> HttpUtils
+
+@enduml
